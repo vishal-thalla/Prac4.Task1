@@ -2,13 +2,6 @@
 #include <iomanip>
 #include <string>
 
-// Calculates the average hours worked by the employees.
-/* divide the program into little functions
-getAverage
-displayArray
-loadArray
-*/
-
 using namespace std; 
 
 const int MAX_ARR_SIZE= 10000;
@@ -22,7 +15,7 @@ const string DASHES = "---------------------------------------------------------
 	SERROR_2 = ". It is invalid. Program terminated.",
 	SERROR_3 = " and indicated that it is invalid. Program terminated.",
 	SAB_1 = "You have entered ",
-	SAB_2 = ", which is an abnormal input. Please confirm input (Y or N): ";
+	SAB_2 = ", which is an abnormal input. Please confirm input (Y \e[1mor\e[0m N): ";
 
 int loadArray(int arr[], int& length){
 	int input, last , emp =0;
@@ -30,12 +23,12 @@ int loadArray(int arr[], int& length){
 	length = 0;
 	
 	while (input >= 0 && input != EXIT_CODE){
-		cout << SGET_HOURS << ++emp << " : ";
+		cout << SGET_HOURS << ++emp << ": ";
 		cin >> input;
 		if (input == EXIT_CODE || input < 0 || input > 50)/* must not skip 0s */	
 			return input; // jump out of function with give last input
 		else {
-			if (input == 0 || input > 40){
+			if (input == 0 || input > 40){ //already check for above 50
 				cout << SAB_1 << input << SAB_2;
 				cin  >> yOrn;				
 				if (yOrn == 'N')
@@ -69,6 +62,7 @@ int main ()
 	int hours[MAX_ARR_SIZE], last, length;	
 	
 	cout << "Enter " << EXIT_CODE<< " to stop input\n";
+	
 	last  = loadArray(hours, length);
 	cout << DASHES;
 	if (last == EXIT_CODE) { // the 999 exit code
